@@ -6,6 +6,8 @@ const port = 3000
 const User = require('./models/user')
 const bodyParser = require('body-parser')
 
+//引入路由器
+const routes = require('./routes/index')
 //載入mongoose
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/user-data', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -25,25 +27,10 @@ app.engine('handlebars',  exhbs({ defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
 app.use(bodyParser.urlencoded({ extended: true} ))
-//設置路由
-app.get('/', (req, res) => {
-  res.render('index')
-})
 
-app.post('/login', (req, res) => {
-  const msg = 'Username 或Password 錯誤'
-  User.find({ email: req.body.email, password: req.body.password
-  })
-    .lean()
-    .then(function (user) {
-      if (user.length === 1) {
-        res.render('welcome', {firstName: user[0].firstName})
-      } else {
-        res.render('index', {email: req.body.email, password: req.body.password, msg: msg})
-      }
-    })
-    .catch(error => console.log(error))
-})
+app.use(routes)
+
+
 
 //監聽器
 app.listen(port, () => {
