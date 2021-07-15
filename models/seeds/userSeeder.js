@@ -5,8 +5,6 @@ const db = require('../../config/mongoose')
 //載入user.json檔案
 const data = require('../../user.json')
 const userData = data.users
-
-
 //連線成功
 db.once('open', () => {
   console.log('mongodb connected!')
