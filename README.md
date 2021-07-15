@@ -6,8 +6,8 @@
 ![畫面](./畫面.png)
 
 ## 預設帳號組
-email: 
-<br> tony@stark.com
+email: tony@stark.com
+<br>
 password: iamironman
 
 email: captain@hotmail.com
